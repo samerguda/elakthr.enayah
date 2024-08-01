@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Preview مغاسل  الاكثر عناية </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+
+        <img id="previewImage" src="22.png" alt="Laundry Image">
+        <div class="button-group">
+            <a href="Screenshot 2024-08-01 at 4.58.09 PM.png" download class="button">Download Image</a>
+            <button class="button" onclick="sendEmail()">Send by Email</button>
+            <button class="button" onclick="sendWhatsApp()">Send by WhatsApp</button>
+        </div>
+    </div>
+
+
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+
+.container {
+    text-align: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+
+
+
+<script>
+    function sendEmail() {
+    const subject = "Check out this image!";
+    const body = "I wanted to share this image with you.";
+    const imageUrl = window.location.href + "Screenshot 2024-08-01 at 4.58.09 PM.png";
+    const mailToLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}%0A%0A${encodeURIComponent(imageUrl)}`;
+    window.location.href = mailToLink;
+}
+
+function sendWhatsApp() {
+    const text = "Check out this image!";
+    const imageUrl = window.location.href + "Screenshot 2024-08-01 at 4.58.09 PM.png";
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}%0A%0A${encodeURIComponent(imageUrl)}`;
+    window.open(whatsappUrl, "_blank");
+}
+
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>
