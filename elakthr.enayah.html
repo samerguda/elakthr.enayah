@@ -1,95 +1,360 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Preview مغاسل  الاكثر عناية </title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C1 — Vocab - French | Topics & Vocabulaire</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Tajawal & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+    }
+    .font-fr {
+      font-family: 'Inter', sans-serif;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #059669;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #047857;
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
+<body class="bg-emerald-950/5 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-emerald-700 selection:text-white">
 
-        <img id="previewImage" src="22.png" alt="Laundry Image">
-        <div class="button-group">
-            <a href="Screenshot 2024-08-01 at 4.58.09 PM.png" download class="button">Download Image</a>
-            <button class="button" onclick="sendEmail()">Send by Email</button>
-            <button class="button" onclick="sendWhatsApp()">Send by WhatsApp</button>
+  <div>
+    <!-- Executive Header with Deep Emerald and Gold Gradient -->
+    <header class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white shadow-2xl relative overflow-hidden border-b border-amber-500/30">
+      <!-- Background Decorative Pattern -->
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs sm:text-sm font-semibold border border-amber-500/40 mb-3 backdrop-blur-sm">
+              <span>🌟 المستوى C1 — طلاقة ودقة أكاديمية</span>
+              <span>•</span>
+              <span>3,000 كلمة / 70 موضوعاً</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-black tracking-tight text-amber-100">مواضيع المستوى الخبير والأكاديمي (C1)</h1>
+            <p class="text-emerald-100/80 text-sm sm:text-base mt-1 max-w-2xl">
+              دليل المفردات والتعبير الدقيق: النقد الفلسفي، التحليل الأكاديمي، التفاوض رفيع المستوى، والمصطلحات المجازية (Idioms & Collocations).
+            </p>
+          </div>
+
+          <!-- Action Header Buttons -->
+          <div class="flex flex-col sm:flex-row md:flex-col items-stretch sm:items-center md:items-end gap-3">
+            <button 
+              id="copyAllBtn" 
+              onclick="copyAllTopics()" 
+              class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-emerald-950 font-bold px-5 py-3 rounded-xl shadow-lg border border-amber-300 transition-all duration-200 hover:shadow-xl flex items-center justify-center gap-2 text-sm sm:text-base active:scale-95"
+            >
+              <svg class="w-5 h-5 text-emerald-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+              </svg>
+              <span>نسخ جميع العناوين (70)</span>
+            </button>
+            <span id="topicCounter" class="text-xs text-amber-200/80 text-center md:text-left">
+              عرض 70 من 70 موضوعاً
+            </span>
+          </div>
         </div>
-    </div>
+      </div>
+    </header>
 
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+      <!-- Search Input Card -->
+      <div class="bg-white rounded-2xl shadow-xl border border-emerald-900/10 p-4 sm:p-5 mb-6 backdrop-blur-md">
+        <div class="relative">
+          <input 
+            type="text" 
+            id="searchInput" 
+            oninput="filterTopics()"
+            placeholder="ابحث عن موضوع بالعربية أو الفرنسية (مثلاً: المفردات الأكاديمية، Économie avancée, التفكير المجازي)..." 
+            class="w-full pl-10 pr-12 py-3.5 bg-emerald-50/30 border border-emerald-100 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white text-sm sm:text-base transition duration-200"
+          >
+          <div class="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-600 pointer-events-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <button 
+            id="clearSearchBtn" 
+            onclick="clearSearch()" 
+            class="hidden absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 rounded-full hover:bg-slate-200 transition"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
 
+      <div id="listWrapper" class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden mb-12">
+        <div class="hidden sm:grid grid-cols-12 bg-emerald-900/5 px-6 py-3.5 border-b border-emerald-900/10 text-xs font-bold text-emerald-950 uppercase tracking-wider">
+          <span class="col-span-1 text-center">#</span>
+          <span class="col-span-5">الموضوع بالعربية</span>
+          <span class="col-span-4">الموضوع بالفرنسية</span>
+          <span class="col-span-2 text-left">الإجراء</span>
+        </div>
 
-    
-    <style>
-        body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f4f4f9;
-}
+        <ul id="topicsList" class="divide-y divide-slate-100">
+          <!-- Dynamic topics load here -->
+        </ul>
 
-.container {
-    text-align: center;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-12 px-4">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-50 rounded-full text-emerald-600 mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-700">لم يتم العثور على نتائج متطابقة!</h3>
+          <p class="text-slate-500 text-sm mt-1">تأكد من صحة الكلمة المدخلة أو جرب البحث بكلمة عامة أخرى.</p>
+        </div>
+      </div>
+    </main>
+  </div>
 
-img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-500 text-sm">
+    <p>دليل مفردات اللغتين العربية والفرنسية — المستوى C1 (الطلاقة الأكاديمية والاحترافية)</p>
+  </footer>
 
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-emerald-950 text-amber-300 px-6 py-3.5 rounded-2xl shadow-2xl border border-amber-500/30 text-sm font-semibold opacity-0 pointer-events-none transition-all duration-300 transform translate-y-3 flex items-center gap-3 backdrop-blur-md z-50">
+    <span class="w-6 h-6 bg-amber-500 text-emerald-950 rounded-full flex items-center justify-center text-xs font-black">✓</span>
+    <span id="toastMessage">تم نسخ النص بنجاح!</span>
+  </div>
 
-.button {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
+  <script>
+    const topicsData = [
+      { id: 1, ar: "المفردات والأساليب الأكاديمية", fr: "Vocabulaire et registre académiques" },
+      { id: 2, ar: "المفردات المهنية المتقدمة", fr: "Vocabulaire professionnel avancé" },
+      { id: 3, ar: "الاقتصاد المتقدم والتمويل الكلي", fr: "Économie avancée et macrofinance" },
+      { id: 4, ar: "الإدارة الاستراتيجية والقيادة المؤسسية", fr: "Management stratégique et leadership institutionnel" },
+      { id: 5, ar: "القانون الدستوري والتشريع مقارن", fr: "Droit constitutionnel et législation comparée" },
+      { id: 6, ar: "السياسات العامة والحوكمة الدولية", fr: "Politiques publiques et gouvernance internationale" },
+      { id: 7, ar: "العلوم والبحث العلمي المتقدم", fr: "Sciences et recherche scientifique avancée" },
+      { id: 8, ar: "التكنولوجيا الناشئة والابتكار الجذر", fr: "Technologies émergentes et innovation de rupture" },
+      { id: 9, ar: "منهجية البحث والتحليل الأكاديمي", fr: "Méthodologie de recherche et analyse académique" },
+      { id: 10, ar: "الإعلام والتحليل النظري للمحتوى", fr: "Médias et analyse théorique du discours" },
+      { id: 11, ar: "الصحافة الاستقصائية والأخلاقيات", fr: "Journalisme d'investigation et déontologie" },
+      { id: 12, ar: "الأدب والدراسات النقدية", fr: "Littérature et études critiques" },
+      { id: 13, ar: "الثقافة والنقد الثقافي", fr: "Culture et critique culturelle" },
+      { id: 14, ar: "الفلسفة والمنطق التحليلي", fr: "Philosophie et logique analytique" },
+      { id: 15, ar: "علم الاجتماع والظواهر المجتمعية", fr: "Sociologie et phénomènes sociétaux" },
+      { id: 16, ar: "علم النفس التحليلي والسلوكي", fr: "Psychologie analytique et comportementale" },
+      { id: 17, ar: "الاستدامة والبيئة العالمية", fr: "Durabilité et écologie globale" },
+      { id: 18, ar: "عالم الأعمال والاستثمار الاستراتيجي", fr: "Monde des affaires et investissement stratégique" },
+      { id: 19, ar: "القيادة وإدارة الفرق المعقدة", fr: "Leadership et gestion d'équipes complexes" },
+      { id: 20, ar: "التفاوض المتقدم وإدارة النزاعات", fr: "Négociation avancée et gestion des conflits" },
+      { id: 21, ar: "النقاش والمناظرة الفكرية", fr: "Débat et argumentation intellectuelle" },
+      { id: 22, ar: "الإقناع والبلاغة الخطابية", fr: "Persuasion et rhétorique oratorique" },
+      { id: 23, ar: "النقد والمراجعة الأكاديمية", fr: "Critique et revue académique" },
+      { id: 24, ar: "التحليل والاستنتاج المنطقي", fr: "Analyse et déduction logique" },
+      { id: 25, ar: "التعبير المجازي والصور البلاغية", fr: "Expression imagée et figures de style" },
+      { id: 26, ar: "التعبير الاصطلاحي (Idioms)", fr: "Expressions idiomatiques et métaphores" },
+      { id: 27, ar: "المتلازمات اللفظية (Collocations)", fr: "Collocations et associations lexicales" },
+      { id: 28, ar: "الأفعال المركبة والمبنية للمجهول المتقدم", fr: "Verbes à particule et structures passives avancées" },
+      { id: 29, ar: "الأخلاقيات البيولوجية والطب الحديث", fr: "Bioéthique et médecine moderne" },
+      { id: 30, ar: "الذكاء الاصطناعي والتأثيرات الأخلاقية", fr: "Intelligence artificielle et enjeux éthiques" },
+      { id: 31, ar: "التحول الرقمي وأمن المعلومات", fr: "Virage numérique et sécurité des systèmes" },
+      { id: 32, ar: "إدارة المخاطر الكبرى والأزمات", fr: "Gestion des grands risques et des crises" },
+      { id: 33, ar: "العدالة الاجتماعية وحقوق المواطنة", fr: "Justice sociale et droits civiques" },
+      { id: 34, ar: "الأنظمة القضائية وتطبيق القانون", fr: "Systèmes judiciaires et application de la loi" },
+      { id: 35, ar: "الجيوسياسية والتوازن الدولي", fr: "Géopolitique et équilibre mondial" },
+      { id: 36, ar: "التنمية الاقتصادية المستدامة", fr: "Développement économique durable" },
+      { id: 37, ar: "التخطيط العمراني والمدن الذكية", fr: "Aménagement urbain et villes intelligentes" },
+      { id: 38, ar: "التعليم العالي وسياسات الإبداع", fr: "Enseignement supérieur et politiques d'innovation" },
+      { id: 39, ar: "الابتكار الاجتماعي والمبادرات", fr: "Innovation sociale et initiatives communautaires" },
+      { id: 40, ar: "الهوية الوطنية والتعددية الثقافية", fr: "Identité nationale et multiculturalisme" },
+      { id: 41, ar: "تحليل الخطاب السياسي والإعلامي", fr: "Analyse du discours politique et médiatique" },
+      { id: 42, ar: "سوسيولوجيا العمل والمؤسسات", fr: "Sociologie du travail et des organisations" },
+      { id: 43, ar: "التسويق الاستراتيجي وسلوك المستهلك", fr: "Marketing stratégique et comportement du consommateur" },
+      { id: 44, ar: "إدارة التغيير في المؤسسات الكبرى", fr: "Gestion du changement dans les grandes organisations" },
+      { id: 45, ar: "المحاسبة المتقدمة والتدقيق المالي", fr: "Comptabilité avancée et audit financier" },
+      { id: 46, ar: "سلسلة الإمداد اللوجستي العالمي", fr: "Chaîne logistique globale et approvisionnement" },
+      { id: 47, ar: "الملكية الفكرية وبراءات الاختراع", fr: "Propriété intellectuelle et brevets" },
+      { id: 48, ar: "إدارة المعرفة والابتكار", fr: "Gestion des connaissances et de l'innovation" },
+      { id: 49, ar: "التعددية اللغوية والترجمة الفورية", fr: "Multilinguisme et traduction simultanée" },
+      { id: 50, ar: "المنطق والقياس الاستدلالي", fr: "Logique et raisonnement déductif" },
+      { id: 51, ar: "البلاغة والتعبير الدقيق", fr: "Rhétorique et précision d'expression" },
+      { id: 52, ar: "الفلسفة السياسية والنظرية الاجتماعية", fr: "Philosophie politique et théorie sociale" },
+      { id: 53, ar: "الذكاء العاطفي والقيادة النفسية", fr: "Intelligence émotionnelle et leadership psychologique" },
+      { id: 54, ar: "الدراسات الديموغرافية والسكانية", fr: "Études démographiques et population" },
+      { id: 55, ar: "السياسات المالية والنقدية", fr: "Politiques budgétaires et monétaires" },
+      { id: 56, ar: "التجارة الدولية واتفاقيات التبادل", fr: "Commerce international et traités d'échange" },
+      { id: 57, ar: "الأمن الغذائي والزراعة المستدامة", fr: "Sécurité alimentaire et agriculture durable" },
+      { id: 58, ar: "إدارة الطاقة والموارد الطبيعية", fr: "Gestion de l'énergie et des ressources naturelles" },
+      { id: 59, ar: "البحث التطبيقي والتطوير الصناعي", fr: "Recherche appliquée et développement industriel" },
+      { id: 60, ar: "الأنثروبولوجيا والثقافات المقارنة", fr: "Anthropologie et cultures comparées" },
+      { id: 61, ar: "الدبلوماسية وتدبير العلاقات الدولية", fr: "Diplomatie et conduite des relations internationales" },
+      { id: 62, ar: "التضخم والأسواق المالية المتقدمة", fr: "Inflation et marchés financiers avancés" },
+      { id: 63, ar: "الحوكمة المؤسسية والشفافية", fr: "Gouvernance d'entreprise et transparence" },
+      { id: 64, ar: "إدارة السمعة والعلاقات العامة الاستراتيجية", fr: "Gestion de la réputation et relations publiques stratégiques" },
+      { id: 65, ar: "المسؤولية المجتمعية والبيئية للمؤسسات", fr: "Responsabilité sociétale et environnementale des entreprises" },
+      { id: 66, ar: "التفكير النقدي وحل المشكلات المعقدة", fr: "Pensée critique et résolution de problèmes complexes" },
+      { id: 67, ar: "الدراسات المستقبلية والتنبؤ الاستراتيجي", fr: "Études prospectives et prévision stratégique" },
+      { id: 68, ar: "علم الجريمة والوقاية الأمنية", fr: "Criminologie et prévention sécuritaire" },
+      { id: 69, ar: "الفنون الجميلة والنقد الجمالي", fr: "Beaux-arts et critique esthétique" },
+      { id: 70, ar: "مطلحات المناظرات والتعقيب الفكري", fr: "Vocabulaire de la joute verbale et de la réfutation" }
+    ];
 
-.button:hover {
-    background-color: #0056b3;
-}
+    let activeTopics = [...topicsData];
 
-    </style>
+    function renderTopics(items) {
+      const container = document.getElementById("topicsList");
+      const emptyState = document.getElementById("emptyState");
+      const counter = document.getElementById("topicCounter");
+      
+      container.innerHTML = "";
+      counter.textContent = `عرض ${items.length} من ${topicsData.length} موضوعاً`;
 
+      if (items.length === 0) {
+        emptyState.classList.remove("hidden");
+        return;
+      } else {
+        emptyState.classList.add("hidden");
+      }
 
+      items.forEach((item) => {
+        const li = document.createElement("li");
+        li.className = "p-4 sm:px-6 hover:bg-emerald-50/40 transition duration-150 flex flex-col sm:grid sm:grid-cols-12 items-start sm:items-center gap-3 sm:gap-2 group";
 
-<script>
-    function sendEmail() {
-    const subject = "Check out this image!";
-    const body = "I wanted to share this image with you.";
-    const imageUrl = window.location.href + "Screenshot 2024-08-01 at 4.58.09 PM.png";
-    const mailToLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}%0A%0A${encodeURIComponent(imageUrl)}`;
-    window.location.href = mailToLink;
-}
+        const textToCopy = `${item.ar} - ${item.fr} Vocabulaire`;
 
-function sendWhatsApp() {
-    const text = "Check out this image!";
-    const imageUrl = window.location.href + "Screenshot 2024-08-01 at 4.58.09 PM.png";
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}%0A%0A${encodeURIComponent(imageUrl)}`;
-    window.open(whatsappUrl, "_blank");
-}
+        li.innerHTML = `
+          <div class="sm:col-span-1 flex items-center gap-2 sm:justify-center">
+            <span class="w-7 h-7 rounded-lg bg-emerald-100/70 text-emerald-950 font-bold text-xs flex items-center justify-center group-hover:bg-emerald-700 group-hover:text-white transition">
+              ${item.id}
+            </span>
+            <span class="sm:hidden text-xs text-slate-400 font-medium">الموضوع #${item.id}</span>
+          </div>
 
-</script>
+          <div class="sm:col-span-5 font-bold text-slate-800 text-base sm:text-lg">
+            ${item.ar}
+          </div>
 
-    <script src="script.js"></script>
+          <div class="sm:col-span-4 text-emerald-800 font-medium font-fr text-sm sm:text-base" dir="ltr">
+            ${item.fr}
+          </div>
+
+          <div class="sm:col-span-2 w-full sm:w-auto flex justify-end mt-1 sm:mt-0">
+            <button 
+              onclick="copySingleTopic('${textToCopy.replace(/'/g, "\\'")}', this)"
+              class="w-full sm:w-auto px-4 py-2 bg-slate-100 hover:bg-emerald-700 text-slate-700 hover:text-white border border-slate-200 hover:border-emerald-700 rounded-xl text-xs sm:text-sm font-semibold transition duration-200 flex items-center justify-center gap-2 active:scale-95 shadow-sm"
+            >
+              <span>نسخ</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 002-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+            </button>
+          </div>
+        `;
+
+        container.appendChild(li);
+      });
+    }
+
+    function filterTopics() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      const clearBtn = document.getElementById("clearSearchBtn");
+
+      if (query.length > 0) {
+        clearBtn.classList.remove("hidden");
+      } else {
+        clearBtn.classList.add("hidden");
+      }
+
+      activeTopics = topicsData.filter(item => 
+        item.ar.toLowerCase().includes(query) || 
+        item.fr.toLowerCase().includes(query)
+      );
+
+      renderTopics(activeTopics);
+    }
+
+    function clearSearch() {
+      const searchInput = document.getElementById("searchInput");
+      searchInput.value = "";
+      filterTopics();
+      searchInput.focus();
+    }
+
+    function copySingleTopic(text, btn) {
+      performCopy(text);
+
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = `<span>تم النسخ!</span> ✓`;
+      btn.classList.add("bg-emerald-700", "text-white", "border-emerald-700");
+      btn.classList.remove("bg-slate-100", "text-slate-700", "border-slate-200");
+
+      showToast("تم النسخ للحافظة!");
+
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.classList.remove("bg-emerald-700", "text-white", "border-emerald-700");
+        btn.classList.add("bg-slate-100", "text-slate-700", "border-slate-200");
+      }, 1500);
+    }
+
+    function copyAllTopics() {
+      if (activeTopics.length === 0) {
+        showToast("لا توجد مواضيع لنسخها!");
+        return;
+      }
+
+      const allFormattedText = activeTopics
+        .map(item => `${item.ar} - ${item.fr} Vocabulaire`)
+        .join("\n");
+
+      performCopy(allFormattedText);
+      showToast(`تم نسخ ${activeTopics.length} عنواناً بنجاح!`);
+    }
+
+    function performCopy(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toastMessage");
+
+      toastMsg.textContent = msg;
+      toast.classList.remove("opacity-0", "pointer-events-none", "translate-y-3");
+      toast.classList.add("opacity-100", "translate-y-0");
+
+      setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "pointer-events-none", "translate-y-3");
+      }, 2000);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderTopics(topicsData);
+    });
+  </script>
 </body>
 </html>
